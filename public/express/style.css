@@ -1,0 +1,36 @@
+body {
+  background-color: #F7E8D5;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #d63384; /* Color rosa claro */
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #ffdde1; /* Rosa claro */
+  color: #d63384; /* Color de letra rosa */
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  width: 300px; /* Ancho fijo para los botones */
+  margin-bottom: 15px;
+  transition: background-color 0.3s;
+  border: 2px solid #d63384;
+}
+
+.btn-primary:hover {
+  background-color: #ff9aa2; /* Rosa más oscuro al pasar el mouse */
+}

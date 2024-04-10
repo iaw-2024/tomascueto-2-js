@@ -1,9 +1,84 @@
 const express = require("express");
 const app = express();
 
-app.get("/express", (req, res) => res.send("Express on Vercel!"));
-app.get("/cliente_servidor", (req, res) => res.send("Cliente Servidor on Vercel!"));
-app.use(express.static('public'))
+ess para usar EJS como motor de plantillas
+app.set('view engine', 'ejs');
+
+app.get("/express",(req, res) =>{
+
+    try {
+        const filePath = path.join(__dirname,'..','public','express', 'index.html');
+        
+        res.sendFile(filePath); // Envía el contenido del archivo como respuesta
+    } catch (error) {
+        console.error('Error al leer el archivo HTML:', error);
+        res.status(500).send('Error internoW del servidor');
+    }
+
+});
+
+app.get("/expressdatos",(req, res) => {
+  const pathArchivoJSON = path.join(__dirname, '..','public','express', 'datos.json');
+
+  let datosJSON;
+  try {
+   
+    fs.readFile(pathArchivoJSON, 'utf8', (err, data) => {
+      if (err) {
+        console.error("Error al leer el archivo JSON:", err);
+        return res.status(500).json({ error: "Error interno del servidor" });
+      }
+      
+      datosJSON = JSON.parse(data);
+      res.render('../public/express/listaExpress.ejs', { juegos: datosJSON });
+
+    });
+  } catch (error) {
+    console.error("Error al procesar la solicitud:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+
+
+app.get('/json', async (req, res) => {
+    const pathArchivoJSON = path.join(__dirname, '..','public','express', 'datos.json');
+    try {
+     
+      fs.readFile(pathArchivoJSON, 'utf8', (err, data) => {
+        if (err) {
+          console.error("Error al leer el archivo JSON:", err);
+          return res.status(500).json({ error: "Error interno del servidor" });
+        }
+        
+        // Convertir los datos a objeto JSON
+        const datosJSON = JSON.parse(data);
+        
+        // Enviar el JSON como respuesta
+        res.json(datosJSON);
+      });
+    } catch (error) {
+      console.error("Error al procesar la solicitud:", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  });
+
+
+  app.get("/cliente_servidor",(req, res) =>{
+
+    try {
+        const filePath = path.join(__dirname,'..','public','cliente_servidor', 'index.html');
+        
+        res.sendFile(filePath); // Envía el contenido del archivo como respuesta
+    } catch (error) {
+        console.error('Error al leer el archivo HTML:', error);
+        res.status(500).send('Error internoW del servidor');
+    }
+  
+  });
+  
+
+app.use(express.static(path.join(__dirname,'..','public')));
 
 app.listen(3001, () => console.log("Server ready on port 3001."));
 
