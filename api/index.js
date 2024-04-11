@@ -1,8 +1,14 @@
 const express = require("express");
-const app = express();
+const app = express();  
+const path = require('path'); // Módulo para trabajar con rutas de archivos
+const fs = require('fs'); // Módulo para trabajar con los archivos en sí.
 
-ess para usar EJS como motor de plantillas
+//para usar EJS como motor de plantillas
 app.set('view engine', 'ejs');
+
+//Configuración para correr en Vercel
+const PORT = process.env.PORT || 3001;
+
 
 app.get("/express",(req, res) =>{
 
@@ -79,7 +85,8 @@ app.get('/json', async (req, res) => {
   
 
 app.use(express.static(path.join(__dirname,'..','public')));
+console.log(path.join(__dirname,'..','public'))
 
-app.listen(3001, () => console.log("Server ready on port 3001."));
+app.listen(PORT, () => console.log("Server ready on port 3001."));
 
 module.exports = app;
