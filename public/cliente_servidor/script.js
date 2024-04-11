@@ -1,5 +1,5 @@
 let datos;
-fetch('http://localhost:3001/json')
+fetch('/json')
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al obtener el JSON');
