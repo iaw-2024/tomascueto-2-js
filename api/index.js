@@ -10,6 +10,7 @@ app.set('view engine', 'ejs');
 const PORT = process.env.PORT || 3001;
 
 
+
 app.get("/express",(req, res) =>{
 
     try {
@@ -74,8 +75,7 @@ app.get('/json', async (req, res) => {
 
     try {
         const filePath = path.join(__dirname,'..','public','cliente_servidor', 'index.html');
-        
-        res.sendFile(filePath); // Envía el contenido del archivo como respuesta
+        res.sendFile(filePath); // Envía el contenido del archivo como respue sta
     } catch (error) {
         console.error('Error al leer el archivo HTML:', error);
         res.status(500).send('Error internoW del servidor');
@@ -85,8 +85,8 @@ app.get('/json', async (req, res) => {
   
 
 app.use(express.static(path.join(__dirname,'..','public')));
-console.log(path.join(__dirname,'..','public'))
 
-app.listen(PORT, () => console.log("Server ready on port 3001."));
+
+app.listen(PORT, () => console.log(`Server ready on port ${PORT}`));
 
 module.exports = app;
